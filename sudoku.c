@@ -113,9 +113,6 @@ List *get_adj_nodes(Node *n) {
       Node *new_node = copy(n);
       pushBack(adj_nodes, new_node);
     }
-    // Recursively generate more adjacent nodes by calling get_adj_nodes
-    List *more_adj_nodes = get_adj_nodes(n);
-
     n->sudo[row][col] = 0; // Reset the cell back to empty
   }
 
