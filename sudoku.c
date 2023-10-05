@@ -146,8 +146,7 @@ Node *DFS(Node *initial, int *cont) {
       push(S, adj_node);
       free(adj_node);
     }
-
-    free(current);
+    // free(current);
   }
 
   *cont = 1;
