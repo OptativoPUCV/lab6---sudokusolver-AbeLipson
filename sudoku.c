@@ -120,30 +120,33 @@ int is_final(Node *n) {
     int row_check[10] = {0};
     int col_check[10] = {0};
     int subgrid_check[10] = {0};
+
     for (int j = 0; j < 9; j++) {
+      // Check row
       int row_num = n->sudo[i][j];
       if (row_num == 0 || row_check[row_num] == 1) {
-        return 0;
+        return 0; // Duplicate or empty cell in the row
       }
       row_check[row_num] = 1;
 
+      // Check column
       int col_num = n->sudo[j][i];
       if (col_num == 0 || col_check[col_num] == 1) {
-        return 0;
+        return 0; // Duplicate or empty cell in the column
       }
       col_check[col_num] = 1;
 
+      // Check 3x3 subgrid
       int subgrid_row = 3 * (i / 3) + j / 3;
       int subgrid_col = 3 * (i % 3) + j % 3;
-
       int subgrid_num = n->sudo[subgrid_row][subgrid_col];
-
-      if (subgrid_num == 0 || subgrid_check[subgrid_num] == 1){
-        return 0;
+      if (subgrid_num == 0 || subgrid_check[subgrid_num] == 1) {
+        return 0; // Duplicate or empty cell in the subgrid
       }
       subgrid_check[subgrid_num] = 1;
     }
   }
+
   return 1;
 }
 
