@@ -9,3 +9,8 @@ sudoku.c:88:7: error: unused variable ‘count’ [-Werror=unused-variable]
 cc1: all warnings being treated as errors
 Compilation failed
 c81aaa1
+Thu 05 Oct 2023 12:16:50 AM UTC: 
+ sudoku.c | 1 -
+ 1 file changed, 1 deletion(-)
+ tests:  0|0
+db29a57

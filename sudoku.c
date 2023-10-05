@@ -85,7 +85,6 @@ int is_valid(Node *n) {
 
 List *get_adj_nodes(Node *n) {
   List *adj_nodes = (List *)malloc(9 * 9 * sizeof(Node *));
-  int count = 0;
 
   for (int row = 0; row < 9; row++) {
     for (int col = 0; col < 9; col++) {
@@ -102,22 +101,22 @@ List *get_adj_nodes(Node *n) {
     }
   }
 
-    return adj_nodes;
-  }
+  return adj_nodes;
+}
 
-  int is_final(Node * n) { return 0; }
+int is_final(Node *n) { return 0; }
 
-  Node *DFS(Node * initial, int *cont) { return NULL; }
+Node *DFS(Node *initial, int *cont) { return NULL; }
 
-  /*
-  int main( int argc, char *argv[] ){
+/*
+int main( int argc, char *argv[] ){
 
-    Node* initial= read_file("s12a.txt");;
+  Node* initial= read_file("s12a.txt");;
 
-    int cont=0;
-    Node* final = DFS(initial, &cont);
-    printf("iterations:%d\n",cont);
-    print_node(final);
+  int cont=0;
+  Node* final = DFS(initial, &cont);
+  printf("iterations:%d\n",cont);
+  print_node(final);
 
-    return 0;
-  }*/
+  return 0;
+}*/
