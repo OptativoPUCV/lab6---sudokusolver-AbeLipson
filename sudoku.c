@@ -86,20 +86,36 @@ int is_valid(Node *n) {
 List *get_adj_nodes(Node *n) {
   List *adj_nodes = (createList());
 
-  for (int row = 0; row < 9; row++) {
-    for (int col = 0; col < 9; col++) {
-      if (n->sudo[row][col] == 0) {
-        for (int num = 1; num <= 9; num++) {
-          n->sudo[row][col] = num;
-          if (is_valid(n)) {
-            Node *new_node = copy(n);
-            pushBack(adj_nodes, new_node);
-          }
-          n->sudo[row][col] = 0;
+   // Create an array to store the coordinates of empty cells
+    int empty_cells[81][2];
+    int empty_count = 0;
+
+    // Find and store the coordinates of empty cells
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (n->sudo[i][j] == 0) {
+                empty_cells[empty_count][0] = i;
+                empty_cells[empty_count][1] = j;
+                empty_count++;
+            }
         }
-      }
     }
-  }
+
+    // Use a loop to iterate through the empty cells
+    for (int cell_index = 0; cell_index < empty_count; cell_index++) {
+        int row = empty_cells[cell_index][0];
+        int col = empty_cells[cell_index][1];
+
+        for (int num = 1; num <= 9; num++) {
+            n->sudo[row][col] = num;
+            if (is_valid(n)) {
+                // If it's a valid placement, create a new node and add it to the linked list
+                Node* new_node = copy(n);
+                pushBack(adj_nodes, new_node);
+            }
+            n->sudo[row][col] = 0; // Reset the cell back to empty
+        }
+    }
 
   return adj_nodes;
 }
