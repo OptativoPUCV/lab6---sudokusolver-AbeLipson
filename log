@@ -38,3 +38,14 @@ Thu 05 Oct 2023 05:34:26 PM UTC:
  tests:  5|3
 total_score: 35/70
 53f08e8
+Thu 05 Oct 2023 05:51:42 PM UTC: 
+ sudoku.c | 32 +++++++++++++++++++++++++-------
+ 1 file changed, 25 insertions(+), 7 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:117:11: error: unused variable ‘more_adj_nodes’ [-Werror=unused-variable]
+  117 |     List *more_adj_nodes = get_adj_nodes(n);
+      |           ^~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+1297ead
