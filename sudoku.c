@@ -86,10 +86,9 @@ int is_valid(Node *n) {
 List *get_adj_nodes(Node *n) {
   List *adj_nodes = (createList());
 
-  int row = -1; // Initialize to an invalid row
-  int col = -1; // Initialize to an invalid col
+  int row = -1;
+  int col = -1;
 
-  // Find the first empty cell (0) in the Sudoku board
   for (int i = 0; i < 9 && row == -1; i++) {
     for (int j = 0; j < 9 && col == -1; j++) {
       if (n->sudo[i][j] == 0) {
@@ -101,25 +100,52 @@ List *get_adj_nodes(Node *n) {
   }
 
   if (row == -1 || col == -1) {
-    // If there are no empty cells, return an empty list (no adjacent nodes)
     return adj_nodes;
   }
 
   for (int num = 1; num <= 9; num++) {
     n->sudo[row][col] = num;
     if (is_valid(n)) {
-      // If it's a valid placement, create a new node and add it to the linked
-      // list
       Node *new_node = copy(n);
       pushBack(adj_nodes, new_node);
     }
-    n->sudo[row][col] = 0; // Reset the cell back to empty
+    n->sudo[row][col] = 0;
   }
 
   return adj_nodes;
 }
 
-int is_final(Node *n) { return 0; }
+int is_final(Node *n) {
+  for (int i = 0; i < 9; i++) {
+    int row_check[10] = {0};
+    int col_check[10] = {0};
+    int subgrid_check[10] = {0};
+    for (int j = 0; j < 9; j++) {
+      int row_num = n->sudo[i][j];
+      if (row_num == 0 || row_check[row_num] == 1) {
+        return 0;
+      }
+      row_check[row_num] = 1;
+
+      int col_num = n->sudo[j][i];
+      if (col_num == 0 || col_check[col_num] == 1) {
+        return 0;
+      }
+      col_check[col_num] = 1;
+
+      int subgrid_row = 3 * (i / 3) + j / 3;
+      int subgrid_col = 3 * (i % 3) + j % 3;
+
+      int subgrid_num = n->sudo[subgrid_row][subgrid_col];
+
+      if (subgrid_num == 0 || subgrid_check[subgrid_num] == 1){
+        return 0;
+      }
+      subgrid_check[subgrid_num] = 1;
+    }
+  }
+  return 1;
+}
 
 Node *DFS(Node *initial, int *cont) { return NULL; }
 
