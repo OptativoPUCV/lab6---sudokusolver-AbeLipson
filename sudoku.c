@@ -142,11 +142,10 @@ Node *DFS(Node *initial, int *cont) {
     List *adj_nodes = get_adj_nodes(current);
 
     while (!is_empty(adj_nodes)) {
-      Node *adj_node = first(adj_nodes);
+      Node *adj_node = top(adj_nodes);
+      pop(adj_nodes);
       push(S, adj_node);
-      free(adj_node);
     }
-    // free(current);
   }
 
   *cont = 1;
