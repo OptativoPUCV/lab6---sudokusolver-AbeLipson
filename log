@@ -1,0 +1,11 @@
+Thu 05 Oct 2023 12:16:35 AM UTC: 
+ sudoku.c | 64 ++++++++++++++++++++++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 54 insertions(+), 10 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:88:7: error: unused variable ‘count’ [-Werror=unused-variable]
+   88 |   int count = 0;
+      |       ^~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+c81aaa1
