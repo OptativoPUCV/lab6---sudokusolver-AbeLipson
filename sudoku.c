@@ -84,7 +84,7 @@ int is_valid(Node *n) {
 }
 
 List *get_adj_nodes(Node *n) {
-  List *adj_nodes = (List *)malloc(9 * 9 * sizeof(Node *));
+  List *adj_nodes = (createList());
 
   for (int row = 0; row < 9; row++) {
     for (int col = 0; col < 9; col++) {
