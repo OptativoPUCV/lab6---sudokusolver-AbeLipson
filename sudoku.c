@@ -118,35 +118,48 @@ List *get_adj_nodes(Node *n) {
 int is_final(Node *n) {
   for (int i = 0; i < 9; i++) {
     int row_check[10] = {0};
-    int col_check[10] = {0};
-    int subgrid_check[10] = {0};
-
     for (int j = 0; j < 9; j++) {
-      // Check row
-      int row_num = n->sudo[i][j];
-      if (row_num == 0 || row_check[row_num] == 1) {
-        return 0; // Duplicate or empty cell in the row
+      int num = n->sudo[i][j];
+      if (num < 1 || num > 9 || row_check[num] == 1) {
+        return 0;
       }
-      row_check[row_num] = 1;
-
-      // Check column
-      int col_num = n->sudo[j][i];
-      if (col_num == 0 || col_check[col_num] == 1) {
-        return 0; // Duplicate or empty cell in the column
-      }
-      col_check[col_num] = 1;
-
-      // Check 3x3 subgrid
-      int subgrid_row = 3 * (i / 3) + j / 3;
-      int subgrid_col = 3 * (i % 3) + j % 3;
-      int subgrid_num = n->sudo[subgrid_row][subgrid_col];
-      if (subgrid_num == 0 || subgrid_check[subgrid_num] == 1) {
-        return 0; // Duplicate or empty cell in the subgrid
-      }
-      subgrid_check[subgrid_num] = 1;
+      row_check[num] = 1;
     }
   }
 
+  for (int j = 0; j < 9; j++) {
+    int col_check[10] = {0};
+    for (int i = 0; i < 9; i++) {
+      int num = n->sudo[i][j];
+      if (num < 1 || num > 9 || col_check[num] == 1) {
+        return 0;
+      }
+      col_check[num] = 1;
+    }
+  }
+
+  for (int row_offset = 0; row_offset < 9; row_offset += 3) {
+    for (int col_offset = 0; col_offset < 9; col_offset += 3) {
+      int subgrid_check[10] = {0};
+      for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+          int num = n->sudo[row_offset + i][col_offset + j];
+          if (num < 1 || num > 9 || subgrid_check[num] == 1) {
+            return 0;
+          }
+          subgrid_check[num] = 1;
+        }
+      }
+    }
+  }
+
+  for (int i = 0; i < 9; i++) {
+    for (int j = 0; j < 9; j++) {
+      if (n->sudo[i][j] == 0) {
+        return 0;
+      }
+    }
+  }
   return 1;
 }
 
