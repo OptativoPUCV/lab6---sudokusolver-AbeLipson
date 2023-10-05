@@ -117,50 +117,13 @@ List *get_adj_nodes(Node *n) {
 
 int is_final(Node *n) {
   for (int i = 0; i < 9; i++) {
-    int row_check[10] = {0};
-    for (int j = 0; j < 9; j++) {
-      int num = n->sudo[i][j];
-      if (num < 1 || num > 9 || row_check[num] == 1) {
-        return 0;
-      }
-      row_check[num] = 1;
-    }
-  }
-
-  for (int j = 0; j < 9; j++) {
-    int col_check[10] = {0};
-    for (int i = 0; i < 9; i++) {
-      int num = n->sudo[i][j];
-      if (num < 1 || num > 9 || col_check[num] == 1) {
-        return 0;
-      }
-      col_check[num] = 1;
-    }
-  }
-
-  for (int row_offset = 0; row_offset < 9; row_offset += 3) {
-    for (int col_offset = 0; col_offset < 9; col_offset += 3) {
-      int subgrid_check[10] = {0};
-      for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-          int num = n->sudo[row_offset + i][col_offset + j];
-          if (num < 1 || num > 9 || subgrid_check[num] == 1) {
-            return 0;
-          }
-          subgrid_check[num] = 1;
-        }
-      }
-    }
-  }
-
-  for (int i = 0; i < 9; i++) {
     for (int j = 0; j < 9; j++) {
       if (n->sudo[i][j] == 0) {
         return 0;
       }
     }
   }
-  return 0;
+  return 1;
 }
 
 Node *DFS(Node *initial, int *cont) { return NULL; }
